@@ -62,7 +62,11 @@ def lradic(l):
     if factor > 1:
         return f"√{l}"
     
-
+def desqon(op):
+    if op == 1:
+        return ""
+    else:
+        return f"√{op}"
         
 def defactor(k):
     if k == 1:
@@ -84,55 +88,71 @@ def rdeas(h):
     if h == 0:
         return ""
     else:
-        return f"{h} {sign} "
+        return f"{h}"
     
 def ldiv(oi):
     if oi == 1:
         return ""
     else:
+        return f") / {oi}"
+    
+def cldiv(oi):
+    if oi == 1:
+        return ""
+    else:
         return f" / {oi}"
+    
+def sldiv(oi):
+    if oi == 1:
+        return ""
+    else:
+        return f"("
+
+def absone(he):
+    if b == -1:
+        return -he
+    else:
+        return he
 
 def csimpli(le,re):
-    gcdv = math.gcd(int(le),int(re), int(denominator))
-    if le % gcdv == 0 and re % gcdv == 0 and denominator % gcdv == 1 and denominator / gcdv == 1:
-        return f"{rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(abs(discriminant)))}i"
-    elif le % gcdv == 0 and re % gcdv == 0:
-        return f"({rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(abs(discriminant)))}i){ldiv(integ(round(denominator / gcdv, 4)))}"
-    elif gcdv == 1:
-        return f"{rdeas(integ(le / math.gcd(le, denominator)))}{ldiv(integ(round(denominator / math.gcd(le, denominator), 4)))} {sign} {defactor(integ(round(re / math.gcd(re,denominator), 4)))}√{lradic(integ(abs(discriminant)))}i{ldiv(integ(round(denominator / math.gcd(re, denominator), 4)))}"
+    gcdl = math.gcd(int(le), int(denominator))
+    gcdr = math.gcd(int(re), int(denominator))
+    return f"{rdeas(integ(le / gcdl))}{cldiv(integ(round(denominator / gcdl, 4)))}{defactor(integ(round(re / gcdr, 4)))} {sign} \033[1;35m{desqon(lradic(integ(abs(discriminant))))}{cldiv(integ(round(denominator / gcdr, 4)))}i\033[0m"
 
 def simpli(le,re):
-    gcdv = math.gcd(int(le),int(re), int(denominator))
-    if le % gcdv == 0 and re % gcdv == 0 and denominator % gcdv == 1 and denominator / gcdv == 1:
-        return f"{rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))}"
-    elif le % gcdv == 0 and re % gcdv == 0:
-        return f"({rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))}){ldiv(integ(round(denominator / gcdv, 4)))}"
-    elif gcdv == 1:
-        return f"{rdeas(integ(le / math.gcd(le, denominator)))}{ldiv(integ(round(denominator / math.gcd(le, denominator), 4)))} {sign} {defactor(integ(round(re / math.gcd(re,denominator), 4)))}√{lradic(integ(discriminant))}{ldiv(integ(round(denominator / math.gcd(re, denominator), 4)))}"
+    gcdl = math.gcd(int(le), int(denominator))
+    gcdr = math.gcd(int(re), int(denominator))
+    if gcdl == gcdr:
+        if le % gcdr == 0 and re % gcdl == 0 and denominator % gcdr == 1 and denominator % gcdl == 1:
+            return f"{rdeas(integ(le / denominator))} {sign} {defactor(integ(round(re / denominator, 4)))}{desqon(lradic(integ(discriminant)))}"
+        elif le % gcdr == 0 and re % gcdl == 0 and denominator % gcdr != 1 and denominator % gcdl != 1:
+            return f"{ldiv(integ(round(denominator / math.gcd(gcdl, gcdr), 4)))}{rdeas(integ(le / math.gcd(gcdr, gcdl)))} {sign} {defactor(integ(round(re / math.gcd(gcdl, gcdr), 4)))}{desqon(lradic(integ(discriminant)))}{ldiv(integ(round(denominator / math.gcd(gcdl, gcdr), 4)))}"
+    else:
+        return f"{rdeas(integ(le / gcdl))} {sign} {ldiv(integ(round(denominator / gcdl, 4)))}{defactor(integ(round(re / gcdr, 4)))}{desqon(lradic(integ(discriminant)))}{ldiv(integ(round(denominator / gcdr, 4)))}"
 
 if a !=0 and discriminant > 0:
 
     print("\n\033[1m\033[34m========REAL SOLUTIONS========\033[0m")
     print(f"\033[1m\033[33mSolution 1: \033[0m")
     sign = "+"
-    print(f"\033[1m{simpli(-b,integ(round(factor, 4)))}\033[0m")
-    print(f"\33[1m= {integ(round(-b / denominator + discriminant**0.5 / denominator, 4))}\033[0m")
+    print(f"\033[1;33m\033[1m{simpli(-b,integ(round(factor, 4)))}\033[0m")
+    print(f"\033[1;36m\33[1m= {integ(round(-b / denominator + discriminant**0.5 / denominator, 4))}\033[0m")
 
     print(f"\033[1m\033[33mSolution 2: \033[0m")
     sign = "-"
-    print(f"\033[1m{simpli(-b,integ(round(factor, 4)))}\033[0m")
-    print(f"\33[1m= {integ(round(-b / denominator - discriminant** 0.5 / denominator, 4))}\033[0m")
+    print(f"\033[1;33m\033[1m{simpli(-b,integ(round(factor, 4)))}\033[0m")
+    print(f"\033[1;36m\33[1m= {integ(round(-b / denominator - discriminant** 0.5 / denominator, 4))}\033[0m")
     
 elif a != 0 and discriminant == 0:
     print("\n\033[1m\033[34m========SOLUTION========\033[0m")
-    print(f"\033[1m= {integ(-b)} / {integ(denominator)}\033[0m")
-    print(f"\33[1m= {integ(round(-b / denominator, 4))}\033[0m")
+    print(f"\033[1;33m\033[1m= {integ(-b)} / {integ(denominator)}\033[0m")
+    print(f"\033[1;36m\33[1m= {integ(round(-b / denominator, 4))}\033[0m")
 
 elif a == 0:
     print("\n\033[1m\033[34m========SOLUTION========\033[0m")
     if a == 0 and b != 0:
-        print(f"\033[1m= {integ(-c)} / {integ(b)}\033[0m")
-        print(f"\33[1m= {integ(round(-c / b, 4))}\033[0m")
+        print(f"\033[1;33m\033[1m= {integ(absone(-c))}{ldiv(integ(absone(b)))}\033[0m")
+        print(f"\033[1;36m\33[1m= {integ(round(-c / b, 4))}\033[0m")
 
     elif a == 0 and b == 0 and c != 0:
             print("\33[1mThe equation is contradictory.\033[0m")
@@ -147,13 +167,13 @@ else:
     if b != 0:
         print(f"\033[1m\033[33mSolution 1: \033[0m")
         sign = "+"
-        print(f"\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
-        print(f"\33[1m= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
+        print(f"\033[1;33m\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
+        print(f"\033[1;36m\33[1m= {rdeas(integ(round(-b / denominator, 4)))} {sign} \033[1;35m{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
         
         print(f"\033[1m\033[33mSolution 2: \033[0m")
         sign = "-"
-        print(f"\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
-        print(f"\33[1m= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
+        print(f"\033[1;33m\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
+        print(f"\033[1;36m\33[1m= {rdeas(integ(round(-b / denominator, 4)))} {sign} \033[1;35m{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
     elif b == 0:
-        print(f"\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
-        print(f"\33[1m= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
+        print(f"\033[1;33m\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
+        print(f"\033[1;36m\33[1m= {rdeas(integ(round(-b / denominator, 4)))} {sign} \033[1;35m{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")

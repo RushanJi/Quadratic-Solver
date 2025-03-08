@@ -144,12 +144,16 @@ elif a == 0:
 else:
 
     print("\n\033[1m\33[34m========COMPLEX SOLUTIONS========\033[0m")
-    print(f"\033[1m\033[33mSolution 1: \033[0m")
-    sign = "+"
-    print(f"\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
-    print(f"\33[1m= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
-    
-    print(f"\033[1m\033[33mSolution 2: \033[0m")
-    sign = "-"
-    print(f"\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
-    print(f"\33[1m= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
+    if b != 0:
+        print(f"\033[1m\033[33mSolution 1: \033[0m")
+        sign = "+"
+        print(f"\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
+        print(f"\33[1m= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
+        
+        print(f"\033[1m\033[33mSolution 2: \033[0m")
+        sign = "-"
+        print(f"\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
+        print(f"\33[1m= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
+    elif b == 0:
+        print(f"\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
+        print(f"\33[1m= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")

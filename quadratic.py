@@ -55,7 +55,7 @@ def lradic(l):
     if factor > 1:
         return f"√{l}"
         
-def deone(k):
+def defactor(k):
     if k == 1:
         k = ""
         return k
@@ -69,24 +69,40 @@ def integ(value):
         return value
 
 denominator = 2 * a
+sign = "<operator>"
 
+def rdeas(h):
+    if h == 0:
+        return ""
+    else:
+        return f"{h} {sign} "
+
+def simpli(le,re):
+    gcdv = math.gcd(int(le),int(re), int(denominator))
+    if le % gcdv == 0 and re % gcdv == 0 and denominator % gcdv == 1:
+        return f"Simplified = {integ(le / gcdv)} {sign} {defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))}"
+    elif le % gcdv == 0 and re % gcdv == 0:
+        return f"Simplified = {integ(le / gcdv)} {sign} {defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))} / {integ(round(denominator / gcdv, 4))}"
+    
 if a !=0 and discriminant >= 0:
 
     print("\n\033[34m========REAL SOLUTIONS========\033[0m")
     print(f"\033[33mSolution 1: \033[0m")
+    sign = "+"
     print(f"= {integ(-b)} + {radic(integ(round(discriminant, 4)))} / {integ(round(denominator, 4))}")
-    print(f"= {integ(round(-b / denominator, 4))} + {deone(integ(round(factor / denominator, 4)))}√{lradic(integ(discriminant))}")
+    print(simpli(-b,integ(round(factor, 4))))
     print(f"= {integ(round(-b / denominator + discriminant**0.5 / denominator, 4))}")
 
     print(f"\033[33mSolution 2: \033[0m")
+    sign = "-"
     print(f"= {integ(-b)} - {radic(integ(round(discriminant, 4)))} / {integ(round(denominator, 4))}")
-    print(f"= {integ(round(-b / denominator, 4))} - {deone(integ(round(factor / denominator, 4)))}√{lradic(integ(discriminant))}")
+    print(simpli(-b,integ(round(factor, 4))))
     print(f"= {integ(round(-b / denominator - discriminant** 0.5 / denominator, 4))}")
     
 elif a != 0 and discriminant == 0:
     print("\n\033[34m========SOLUTION========\033[0m")
     print(f"= {integ(-b)} / {integ(denominator)}")
-    print(f" = {integ(round(-b / denominator + discriminant**0.5 / denominator, 4))}")
+    print(f" = {integ(round(-b / denominator, 4))}")
 
 elif a == 0:
     print("\n\033[34m========SOLUTION========\033[0m")
@@ -97,11 +113,13 @@ else:
 
     print("\n\033[34m========COMPLEX SOLUTIONS========\033[0m")
     print(f"\033[33mSolution 1: \033[0m")
-    print(f"= {integ(-b)} + {radic(integ(abs(discriminant)))}i / {integ(denominator)}")
-    print(f"= {integ(round(-b / denominator, 4))} + {deone(integ(round(factor / denominator, 4)))}√{lradic(abs(integ(discriminant)))}i")
-    print(f"= {integ(round(-b / denominator, 4))} + {integ(round(abs(discriminant)**0.5 / denominator, 4))}i")
+    sign = "+"
+    print(f"= {rdeas(integ(-b))}{radic(integ(abs(discriminant)))}i / {integ(denominator)}")
+    print(f"= {rdeas(integ(round(-b / denominator, 4)))}{defactor(integ(round(factor / denominator, 4)))}√{lradic(abs(integ(discriminant)))}i")
+    print(f"= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i")
     
     print(f"\033[33mSolution 2: \033[0m")
-    print(f"= {integ(-b)} - {radic(integ(abs(discriminant)))}i / {integ(denominator)}")
-    print(f"= {integ(round(-b / denominator, 4))} - {deone(integ(round(factor / denominator, 4)))}√{lradic(abs(integ(discriminant)))}i")
-    print(f"= {integ(round(-b / denominator, 4))} - {integ(round(abs(discriminant)**0.5 / denominator, 4))}i")
+    sign = "-"
+    print(f"= {rdeas(integ(-b))}{radic(integ(abs(discriminant)))}i / {integ(denominator)}")
+    print(f"= {rdeas(integ(round(-b / denominator, 4)))}{defactor(integ(round(factor / denominator, 4)))}√{lradic(abs(integ(discriminant)))}i")
+    print(f"= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i")

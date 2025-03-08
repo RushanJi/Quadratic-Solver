@@ -91,7 +91,7 @@ def rdeas(h):
         return f"{h}"
     
 def ldiv(oi):
-    if oi == 1:
+    if oi == 1 or -1:
         return ""
     else:
         return f") / {oi}"
@@ -103,7 +103,7 @@ def cldiv(oi):
         return f" / {oi}"
     
 def sldiv(oi):
-    if oi == 1:
+    if oi == 1 or -1:
         return ""
     else:
         return f"("
@@ -123,10 +123,10 @@ def simpli(le,re):
     gcdl = math.gcd(int(le), int(denominator))
     gcdr = math.gcd(int(re), int(denominator))
     if gcdl == gcdr:
-        if le % gcdr == 0 and re % gcdl == 0 and denominator % gcdr == 1 and denominator % gcdl == 1:
+        if le % gcdr == 0 and re % gcdl == 0 and denominator % gcdr == 1 or -1 and denominator % gcdl == 1 or -1:
             return f"{rdeas(integ(le / denominator))} {sign} {defactor(integ(round(re / denominator, 4)))}{desqon(lradic(integ(discriminant)))}"
-        elif le % gcdr == 0 and re % gcdl == 0 and denominator % gcdr != 1 and denominator % gcdl != 1:
-            return f"{ldiv(integ(round(denominator / math.gcd(gcdl, gcdr), 4)))}{rdeas(integ(le / math.gcd(gcdr, gcdl)))} {sign} {defactor(integ(round(re / math.gcd(gcdl, gcdr), 4)))}{desqon(lradic(integ(discriminant)))}{ldiv(integ(round(denominator / math.gcd(gcdl, gcdr), 4)))}"
+        elif le % gcdr == 0 and re % gcdl == 0 and denominator % gcdr != 1 or -1 and denominator % gcdl != 1 or -1:
+            return f"{sldiv(integ(round(denominator / math.gcd(gcdl, gcdr), 4)))}{rdeas(integ(le / math.gcd(gcdr, gcdl)))} {sign} {defactor(integ(round(re / math.gcd(gcdl, gcdr), 4)))}{desqon(lradic(integ(discriminant)))}{ldiv(integ(round(denominator / math.gcd(gcdl, gcdr), 4)))}"
     else:
         return f"{rdeas(integ(le / gcdl))} {sign} {ldiv(integ(round(denominator / gcdl, 4)))}{defactor(integ(round(re / gcdr, 4)))}{desqon(lradic(integ(discriminant)))}{ldiv(integ(round(denominator / gcdr, 4)))}"
 

@@ -39,10 +39,11 @@ def radic(n):
         return f"{factor}√{n}"
     else:
         return f"√{n}"
-        
+    
+radicdiscrim = radic(discriminant)
+     
 def lradic(l):
     i = 2
-    global factor
     factor = 1
     while i * i <= l:
         if l % (i * i) == 0:
@@ -54,6 +55,8 @@ def lradic(l):
     
     if factor > 1:
         return f"√{l}"
+    
+
         
 def defactor(k):
     if k == 1:
@@ -83,15 +86,24 @@ def ldiv(oi):
     else:
         return f" / {oi}"
 
+def csimpli(le,re):
+    gcdv = math.gcd(int(le),int(re), int(denominator))
+    if le % gcdv == 0 and re % gcdv == 0 and denominator % gcdv == 1 and denominator / gcdv == 1:
+        return f"Simplified = {rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(abs(discriminant)))}i"
+    elif le % gcdv == 0 and re % gcdv == 0:
+        return f"Simplified = ({rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(abs(discriminant)))}i){ldiv(integ(round(denominator / gcdv, 4)))}"
+    elif gcdv == 1:
+        return f"Simplified = {rdeas(integ(le / math.gcd(le, denominator)))}{ldiv(integ(round(denominator / math.gcd(le, denominator), 4)))} {sign} {defactor(integ(round(re / math.gcd(re,denominator), 4)))}√{lradic(integ(abs(discriminant)))}i{ldiv(integ(round(denominator / math.gcd(re, denominator), 4)))}"
+
 def simpli(le,re):
     gcdv = math.gcd(int(le),int(re), int(denominator))
     if le % gcdv == 0 and re % gcdv == 0 and denominator % gcdv == 1 and denominator / gcdv == 1:
         return f"Simplified = {rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))}"
     elif le % gcdv == 0 and re % gcdv == 0:
-        return f"Simplified = {rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))}{ldiv(integ(round(denominator / gcdv, 4)))}"
+        return f"Simplified = ({rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))}){ldiv(integ(round(denominator / gcdv, 4)))}"
     elif gcdv == 1:
-        return f"Simplified = {rdeas(integ(le / math.gcd(le, denominator)))}{ldiv(integ(round(denominator / math.gcd(le, denominator), 4)))}{defactor(integ(round(re / math.gcd(re,denominator), 4)))}√{lradic(integ(discriminant))}{ldiv(integ(round(denominator / math.gcd(re, denominator), 4)))}"
-    
+        return f"Simplified = {rdeas(integ(le / math.gcd(le, denominator)))}{ldiv(integ(round(denominator / math.gcd(le, denominator), 4)))} {sign} {defactor(integ(round(re / math.gcd(re,denominator), 4)))}√{lradic(integ(discriminant))}{ldiv(integ(round(denominator / math.gcd(re, denominator), 4)))}"
+
 if a !=0 and discriminant > 0:
 
     print("\n\033[34m========REAL SOLUTIONS========\033[0m")
@@ -112,7 +124,7 @@ elif a != 0 and discriminant == 0:
 
 elif a == 0:
     print("\n\033[34m========SOLUTION========\033[0m")
-    if a == 0 and b != 0 and c != 0:
+    if a == 0 and b != 0:
         print(f"= {integ(-c)} / {integ(b)}")
         print(f"= {integ(round(-c / b, 4))}")
 
@@ -128,12 +140,10 @@ else:
     print("\n\033[34m========COMPLEX SOLUTIONS========\033[0m")
     print(f"\033[33mSolution 1: \033[0m")
     sign = "+"
-    print(f"= {rdeas(integ(-b))}{radic(integ(abs(discriminant)))}i / {integ(denominator)}")
-    print(f"= {rdeas(integ(round(-b / denominator, 4)))}{defactor(integ(round(factor / denominator, 4)))}√{lradic(abs(integ(discriminant)))}i")
+    print(csimpli(-b,integ(round(factor, 4))))
     print(f"= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i")
     
     print(f"\033[33mSolution 2: \033[0m")
     sign = "-"
-    print(f"= {rdeas(integ(-b))}{radic(integ(abs(discriminant)))}i / {integ(denominator)}")
-    print(f"= {rdeas(integ(round(-b / denominator, 4)))}{defactor(integ(round(factor / denominator, 4)))}√{lradic(abs(integ(discriminant)))}i")
+    print(csimpli(-b,integ(round(factor, 4))))
     print(f"= {rdeas(integ(round(-b / denominator, 4)))}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i")

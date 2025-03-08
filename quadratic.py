@@ -76,38 +76,52 @@ def rdeas(h):
         return ""
     else:
         return f"{h} {sign} "
+    
+def ldiv(oi):
+    if oi == 1:
+        return ""
+    else:
+        return f" / {oi}"
 
 def simpli(le,re):
     gcdv = math.gcd(int(le),int(re), int(denominator))
-    if le % gcdv == 0 and re % gcdv == 0 and denominator % gcdv == 1:
-        return f"Simplified = {integ(le / gcdv)} {sign} {defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))}"
+    if le % gcdv == 0 and re % gcdv == 0 and denominator % gcdv == 1 and denominator / gcdv == 1:
+        return f"Simplified = {rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))}"
     elif le % gcdv == 0 and re % gcdv == 0:
-        return f"Simplified = {integ(le / gcdv)} {sign} {defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))} / {integ(round(denominator / gcdv, 4))}"
+        return f"Simplified = {rdeas(integ(le / gcdv))}{defactor(integ(round(re / gcdv, 4)))}√{lradic(integ(discriminant))}{ldiv(integ(round(denominator / gcdv, 4)))}"
+    elif gcdv == 1:
+        return f"Simplified = {rdeas(integ(le / math.gcd(le, denominator)))}{ldiv(integ(round(denominator / math.gcd(le, denominator), 4)))}{defactor(integ(round(re / math.gcd(re,denominator), 4)))}√{lradic(integ(discriminant))}{ldiv(integ(round(denominator / math.gcd(re, denominator), 4)))}"
     
-if a !=0 and discriminant >= 0:
+if a !=0 and discriminant > 0:
 
     print("\n\033[34m========REAL SOLUTIONS========\033[0m")
     print(f"\033[33mSolution 1: \033[0m")
     sign = "+"
-    print(f"= {integ(-b)} + {radic(integ(round(discriminant, 4)))} / {integ(round(denominator, 4))}")
     print(simpli(-b,integ(round(factor, 4))))
     print(f"= {integ(round(-b / denominator + discriminant**0.5 / denominator, 4))}")
 
     print(f"\033[33mSolution 2: \033[0m")
     sign = "-"
-    print(f"= {integ(-b)} - {radic(integ(round(discriminant, 4)))} / {integ(round(denominator, 4))}")
     print(simpli(-b,integ(round(factor, 4))))
     print(f"= {integ(round(-b / denominator - discriminant** 0.5 / denominator, 4))}")
     
 elif a != 0 and discriminant == 0:
     print("\n\033[34m========SOLUTION========\033[0m")
     print(f"= {integ(-b)} / {integ(denominator)}")
-    print(f" = {integ(round(-b / denominator, 4))}")
+    print(f"= {integ(round(-b / denominator, 4))}")
 
 elif a == 0:
     print("\n\033[34m========SOLUTION========\033[0m")
-    print(f"= {integ(-b)} / {integ(2)}")
-    print(f" = {integ(round(-b / 2, 4))}")
+    if a == 0 and b != 0 and c != 0:
+        print(f"= {integ(-c)} / {integ(b)}")
+        print(f"= {integ(round(-c / b, 4))}")
+
+    elif a == 0 and b == 0 and c != 0:
+            print("The equation is contradictory.")
+
+    elif a == 0 and b == 0 and c == 0:
+        print(f"= 0 = 0")
+        print(f"There are infinite possibilities.")
 
 else:
 

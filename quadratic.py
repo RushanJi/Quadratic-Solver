@@ -151,7 +151,7 @@ elif a != 0 and discriminant == 0:
 elif a == 0:
     print("\n\033[1m\033[34m========SOLUTION========\033[0m")
     if a == 0 and b != 0:
-        print(f"\033[1;33m\033[1m= {integ(absone(-c))}{ldiv(integ(absone(b)))}\033[0m")
+        print(f"\033[1;33m\033[1m= {integ(absone(-c))}{cldiv(integ(absone(b)))}\033[0m")
         print(f"\033[1;36m\33[1m= {integ(round(-c / b, 4))}\033[0m")
 
     elif a == 0 and b == 0 and c != 0:
@@ -159,7 +159,7 @@ elif a == 0:
 
     elif a == 0 and b == 0 and c == 0:
         print(f"\033[1m= 0 = 0")
-        print(f"\33[1mThere are infinite possibilities.\033[0m")
+        print(f"\33[1mThere are infinitely many solutions.\033[0m")
 
 else:
 

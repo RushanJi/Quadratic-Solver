@@ -117,7 +117,7 @@ def absone(he):
 def csimpli(le,re):
     gcdl = math.gcd(int(le), int(denominator))
     gcdr = math.gcd(int(re), int(denominator))
-    return f"{rdeas(integ(le / gcdl))}{cldiv(integ(round(denominator / gcdl, 4)))}{defactor(integ(round(re / gcdr, 4)))} {sign} \033[1;35m{desqon(lradic(integ(abs(discriminant))))}{cldiv(integ(round(denominator / gcdr, 4)))}i\033[0m"
+    return f"({rdeas(integ(le / gcdl))}{cldiv(integ(round(denominator / gcdl, 4)))}{defactor(integ(round(re / gcdr, 4)))}) {sign} \033[1;35m({desqon(lradic(integ(abs(discriminant))))}{cldiv(integ(round(denominator / gcdr, 4)))})i\033[0m"
 
 def simpli(le,re):
     gcdl = math.gcd(int(le), int(denominator))

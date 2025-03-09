@@ -1,8 +1,6 @@
-import math
-
 print("\033[1m\033[32mEnter the coefficient a: \033[0m", end='')
 a = input("\033[1m")
-while isinstance(a, str) == True:
+while isinstance(a, str):
     try:
         a = float(a)
     except ValueError:
@@ -11,7 +9,7 @@ while isinstance(a, str) == True:
         a = input("\033[1m")
 print("\033[1m\033[32mEnter the coefficient b: \033[0m", end='')
 b = input("\033[1m")
-while isinstance(b, str) == True:
+while isinstance(b, str):
     try:
         b = float(b)
     except ValueError:
@@ -20,7 +18,7 @@ while isinstance(b, str) == True:
         b = input("\033[1m")
 print("\033[1m\033[32mEnter the coefficient c: \033[0m", end='')
 c = input("\033[1m")
-while isinstance(c, str) == True:
+while isinstance(c, str):
     try:
         c = float(c)
     except ValueError:

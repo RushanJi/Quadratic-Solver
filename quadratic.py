@@ -81,9 +81,6 @@ def lradic(l):
         else:
             i += 1
     return l
-    
-    if factor > 1:
-        return f"√{l}"
 
 def defactor(k):
     return ("" if k==1 or k==-1 and lradic != 1 else k)
@@ -95,7 +92,10 @@ def integ(value):
         return value
     
 def desqon(ip):
-    return ("" if ip==1 else f"√{ip}")
+    if discriminant > 0:
+        return ("" if ip==1 else f"√{ip}")
+    elif discriminant < 0:
+        return ("" if ip==1 else f"√({ip})")
 
 def sqone(a,b,c):
     return ("1" if integ(lradic(c)) == 1 and integ(a / b) == 1 else "")
@@ -121,18 +121,6 @@ def absone(he):
     else:
         return he
 
-def sb():
-    if lradic(discriminant) == 1:
-        return ""
-    else:
-        return "("
-    
-def eb():
-    if lradic(discriminant) == 1:
-        return ""
-    else:
-        return ")"
-
 def spcredcr(t,e):
     if integ(t / e) == 0:
         return f"{sign}"
@@ -150,20 +138,20 @@ def csimpli(le,re):
     if gcdl == denominator and gcdr == denominator:
         if b == 0:
             if sign == "+":
-                return f"{PURPLE}{sb()}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}{eb()}i"
+                return f"{PURPLE}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}i"
             else:
-                return f"{PURPLE}{sign}{sb()}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}{eb()}i"
+                return f"{PURPLE}{sign}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}i"
         else:
-            return f"{integ(le / denominator)} {sign} {PURPLE}{sb()}{defactor(integ(re / denominator))}{sqone(re, denominator, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{eb()}i"
+            return f"{integ(le / denominator)} {sign} {PURPLE}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}i"
     elif gcdl != denominator and gcdr == denominator:
-        return f"{integ(le / gcdl)} / {integ(denominator / gcdl)} {sign} {PURPLE}{sb()}{defactor(integ(re / denominator))}{sqone(re, denominator, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{eb()}i"
+        return f"{integ(le / gcdl)} / {integ(denominator / gcdl)} {sign} {PURPLE}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}i"
     elif gcdl == denominator and gcdr != denominator:
         if sign == "+":
-            return f"{rdeas(integ(le / denominator))}{PURPLE}{sb()}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{eb()}i / {integ(denominator / gcdr)}"
+            return f"{rdeas(integ(le / denominator))}{PURPLE}{defactor(integ(re / gcdr))}{desqon(lradic(integ(abs(discriminant))))}i / {integ(denominator / gcdr)}"
         elif sign == "-":
-            return f"{integ(le / denominator)} {sign} {PURPLE}{sb()}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{eb()}i / {integ(denominator / gcdr)}"
+            return f"{integ(le / denominator)} {sign} {PURPLE}{defactor(integ(re / gcdr))}{desqon(lradic(integ(abs(discriminant))))}i / {integ(denominator / gcdr)}"
     elif gcdl != denominator and gcdr != denominator:
-        return f"{integ(le / gcdl)}{cldiv(integ(denominator / gcdl))} {sign} {PURPLE}{sb()}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{eb()}i{cldiv(integ(denominator / gcdr))}"
+        return f"{integ(le / gcdl)}{cldiv(integ(denominator / gcdl))} {sign} {PURPLE}{defactor(integ(re / gcdr))}{desqon(lradic(integ(abs(discriminant))))}i{cldiv(integ(denominator / gcdr))}"
 
 def simpli(le,re):
     gcdl = gcd(int(le), int(denominator))

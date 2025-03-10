@@ -147,7 +147,7 @@ def csimpli(le,re):
         return f"{integ(le / gcdl)} / {integ(denominator / gcdl)} {sign} {PURPLE}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}i"
     elif gcdl == denominator and gcdr != denominator:
         if sign == "+":
-            return f"{rdeas(integ(le / denominator))}{PURPLE}{defactor(integ(re / gcdr))}{desqon(lradic(integ(abs(discriminant))))}i / {integ(denominator / gcdr)}"
+            return f"{rdeas(integ(le / denominator))} {sign} {PURPLE}{defactor(integ(re / gcdr))}{desqon(lradic(integ(abs(discriminant))))}i / {integ(denominator / gcdr)}"
         elif sign == "-":
             return f"{integ(le / denominator)} {sign} {PURPLE}{defactor(integ(re / gcdr))}{desqon(lradic(integ(abs(discriminant))))}i / {integ(denominator / gcdr)}"
     elif gcdl != denominator and gcdr != denominator:
@@ -174,7 +174,7 @@ def simpli(le,re):
             else:
                 return f"{integ((le - re) / gcd(int(le - re), int(denominator)))}{cldiv(integ(denominator / gcd(int(le - re), int(denominator))))}"
     else:
-        if integ(denominator / gcdl) == integ(denominator / gcdr) and lradic(discriminant) == 1 and (integ(le / gcdl + re / gcdr)) % integ(denominator / gcdl) == 0 or (integ(le / gcdl - re / gcdr)) % integ(denominator / gcdl) == 0:
+        if integ(denominator / gcdl) == integ(denominator / gcdr) and lradic(discriminant) == 1 and (integ(le / gcdl + re / gcdr)) % integ(denominator / gcdl) == 0 or (integ(le / gcdl - re / gcdr)) % integ(denominator / gcdl) == 0 and isinstance(le, float) == False:
             if sign == "+":
                 return f"{integ((le / gcdl + re / gcdr) / gcd(int(le / gcdl + re / gcdr), int(denominator / gcdl)))}{cldiv(integ(denominator / gcdl / gcd(int(le / gcdl + re / gcdr), int(denominator / gcdl))))}"
             if sign == "-":

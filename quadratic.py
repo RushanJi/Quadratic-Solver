@@ -120,7 +120,19 @@ def absone(he):
         return -he
     else:
         return he
+
+def sb():
+    if lradic(discriminant) == 1:
+        return ""
+    else:
+        return "("
     
+def eb():
+    if lradic(discriminant) == 1:
+        return ""
+    else:
+        return ")"
+
 def spcredcr(t,e):
     if integ(t / e) == 0:
         return f"{sign}"
@@ -137,18 +149,21 @@ def csimpli(le,re):
     gcdr = gcd(int(re), int(denominator))
     if gcdl == denominator and gcdr == denominator:
         if b == 0:
-            return f"{PURPLE}{sign}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}i"
+            if sign == "+":
+                return f"{PURPLE}{sb()}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}{eb()}i"
+            else:
+                return f"{PURPLE}{sign}{sb()}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}{eb()}i"
         else:
-            return f"{integ(le / denominator)} {sign} {PURPLE}{defactor(integ(re / denominator))}{sqone(re, denominator, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i"
+            return f"{integ(le / denominator)} {sign} {PURPLE}{sb()}{defactor(integ(re / denominator))}{sqone(re, denominator, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{eb()}i"
     elif gcdl != denominator and gcdr == denominator:
-        return f"{integ(le / gcdl)} / {integ(denominator / gcdl)} {sign} {PURPLE}{defactor(integ(re / denominator))}{sqone(re, denominator, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i"
+        return f"{integ(le / gcdl)} / {integ(denominator / gcdl)} {sign} {PURPLE}{sb()}{defactor(integ(re / denominator))}{sqone(re, denominator, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{eb()}i"
     elif gcdl == denominator and gcdr != denominator:
         if sign == "+":
-            return f"{rdeas(integ(le / denominator))}{PURPLE}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i / {integ(denominator / gcdr)}"
+            return f"{rdeas(integ(le / denominator))}{PURPLE}{sb()}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{eb()}i / {integ(denominator / gcdr)}"
         elif sign == "-":
-            return f"{integ(le / denominator)} {sign} {PURPLE}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i / {integ(denominator / gcdr)}"
+            return f"{integ(le / denominator)} {sign} {PURPLE}{sb()}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{eb()}i / {integ(denominator / gcdr)}"
     elif gcdl != denominator and gcdr != denominator:
-        return f"{integ(le / gcdl)}{cldiv(integ(denominator / gcdl))} {sign} {PURPLE}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i{cldiv(integ(denominator / gcdr))}"
+        return f"{integ(le / gcdl)}{cldiv(integ(denominator / gcdl))} {sign} {PURPLE}{sb()}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{eb()}i{cldiv(integ(denominator / gcdr))}"
 
 def simpli(le,re):
     gcdl = gcd(int(le), int(denominator))
@@ -233,9 +248,9 @@ else:
         print(f"{YELLOW}Solution 1: {STOP}")
         sign = "+"
         print(f"{YELLOW}{csimpli(-b,integ(round(factor, 4)))}{STOP}")
-        print(f"{CYAN}= {rdeas(integ(round(-b / denominator, 4)))}{PURPLE}{spcredcr(-b, denominator)}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i{STOP}")
+        print(f"{CYAN}= {rdeas(integ(round(-b / denominator, 4)))}{PURPLE}{defactor(integ(round(abs(discriminant)**0.5 / denominator, 4)))}i{STOP}")
 
         print(f"{YELLOW}Solution 2: {STOP}")
         sign = "-"
         print(f"{YELLOW}{csimpli(-b,integ(round(factor, 4)))}{STOP}")
-        print(f"{CYAN}= {rdeas(integ(round(-b / denominator, 4)))}{PURPLE}{spcredcr(-b, denominator)}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i{STOP}")
+        print(f"{CYAN}= {rdeas(integ(round(-b / denominator, 4)))}{PURPLE}{spcredcr(-b, denominator)}{defactor(integ(round(abs(discriminant)**0.5 / denominator, 4)))}i{STOP}")

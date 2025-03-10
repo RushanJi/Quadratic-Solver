@@ -1,30 +1,38 @@
-print("\033[1m\033[32mEnter the coefficient a: \033[0m", end='')
-a = input("\033[1m")
+GREEN = "\033[1m\033[32m"
+BLUE = "\033[1m\033[34m"
+YELLOW = "\033[1;33m\033[1m"
+PURPLE = "\033[1m\033[1;35m"
+CYAN = "\033[1;36m\33[1m"
+WHITE = "\033[1m"
+STOP = "\033[0m"
+
+print("{GREEN}Enter the coefficient a: {STOP}", end='')
+a = input("{WHITE}")
 while isinstance(a, str):
     try:
         a = float(a)
     except ValueError:
         print("Give A Valid Value")
-        print("\033[1m\033[32mEnter the coefficient a: \033[0m", end='')
+        print("{GREEN}Enter the coefficient a: {STOP}", end='')
         a = input("\033[1m")
-print("\033[1m\033[32mEnter the coefficient b: \033[0m", end='')
-b = input("\033[1m")
+print("{GREEN}Enter the coefficient b: {STOP}", end='')
+b = input("{WHITE}")
 while isinstance(b, str):
     try:
         b = float(b)
     except ValueError:
         print("Give A Valid Value")
-        print("\033[1m\033[32mEnter the coefficient b: \033[0m", end='')
+        print("{GREEN}Enter the coefficient b: {STOP}", end='')
         b = input("\033[1m")
-print("\033[1m\033[32mEnter the coefficient c: \033[0m", end='')
+print("{GREEN}Enter the coefficient c: {STOP}", end='')
 c = input("\033[1m")
 while isinstance(c, str):
     try:
         c = float(c)
     except ValueError:
         print("Give A Valid Value")
-        print("\033[1m\033[32mEnter the coefficient c: \033[0m", end='')
-        c = input("\033[1m")
+        print("{GREEN}Enter the coefficient c: {STOP}", end='')
+        c = input("{WHITE}")
 
 discriminant = b**2 - 4*a*c
 
@@ -129,15 +137,18 @@ def csimpli(le,re):
     gcdr = gcd(int(re), int(denominator))
     if gcdl == denominator and gcdr == denominator:
         if b == 0:
-            return f"\033[1;35m{integ(re / denominator)}{desqon(lradic(integ(abs(discriminant))))}i"
+            return f"{PURPLE}{sign}{defactor(integ(re / denominator))}{desqon(lradic(integ(abs(discriminant))))}i"
         else:
-            return f"{integ(le / denominator)} {sign} \033[1;35m{defactor(integ(re / denominator))}{sqone(re, denominator, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i"
+            return f"{integ(le / denominator)} {sign} {PURPLE}{defactor(integ(re / denominator))}{sqone(re, denominator, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i"
     elif gcdl != denominator and gcdr == denominator:
-        return f"{integ(le / gcdl)} / {integ(denominator / gcdl)} {sign} \033[1;35m{defactor(integ(re / denominator))}{sqone(re, denominator, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i"
+        return f"{integ(le / gcdl)} / {integ(denominator / gcdl)} {sign} {PURPLE}{defactor(integ(re / denominator))}{sqone(re, denominator, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i"
     elif gcdl == denominator and gcdr != denominator:
-        return f"{integ(le / denominator)} {sign} \033[1;35m{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i / {integ(denominator / gcdr)}"
+        if sign == "+":
+            return f"{rdeas(integ(le / denominator))}{PURPLE}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i / {integ(denominator / gcdr)}"
+        elif sign == "-":
+            return f"{integ(le / denominator)} {sign} {PURPLE}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i / {integ(denominator / gcdr)}"
     elif gcdl != denominator and gcdr != denominator:
-        return f"{integ(le / gcdl)}{cldiv(integ(denominator / gcdl))} {sign} \033[1;35m{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i{cldiv(integ(denominator / gcdr))}"
+        return f"{integ(le / gcdl)}{cldiv(integ(denominator / gcdl))} {sign} {PURPLE}{defactor(integ(re / gcdr))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}i{cldiv(integ(denominator / gcdr))}"
 
 def simpli(le,re):
     gcdl = gcd(int(le), int(denominator))
@@ -160,7 +171,7 @@ def simpli(le,re):
             else:
                 return f"{integ((le - re) / gcd(int(le - re), int(denominator)))}{cldiv(integ(denominator / gcd(int(le - re), int(denominator))))}"
     else:
-        if integ(denominator / gcdl) == integ(denominator / gcdr) and lradic(discriminant) == 1 and (integ(le / gcdl + re / gcdr)) % integ(denominator / gcdl) == 0:
+        if integ(denominator / gcdl) == integ(denominator / gcdr) and lradic(discriminant) == 1 and (integ(le / gcdl + re / gcdr)) % integ(denominator / gcdl) == 0 or (integ(le / gcdl - re / gcdr)) % integ(denominator / gcdl) == 0:
             if sign == "+":
                 return f"{integ((le / gcdl + re / gcdr) / gcd(int(le / gcdl + re / gcdr), int(denominator / gcdl)))}{cldiv(integ(denominator / gcdl / gcd(int(le / gcdl + re / gcdr), int(denominator / gcdl))))}"
             if sign == "-":
@@ -170,59 +181,61 @@ def simpli(le,re):
 
 if a !=0 and discriminant > 0:
 
-    print("\n\033[1m\033[34m========REAL SOLUTIONS========\033[0m")
-    print(f"\033[1m\033[33mSolution 1: \033[0m")
+    print(f"\n{BLUE}========REAL SOLUTIONS========{STOP}")
+    print(f"{YELLOW}Solution 1: {STOP}")
     sign = "+"
-    print(f"\033[1;33m\033[1m{simpli(-b,integ(round(factor, 4)))}\033[0m")
-    print(f"\033[1;36m\33[1m= {integ(round(-b / denominator + discriminant**0.5 / denominator, 4))}\033[0m")
+    print(f"{YELLOW}{simpli(-b,integ(round(factor, 4)))}{STOP}")
+    print(f"{CYAN}= {integ(round(-b / denominator + discriminant**0.5 / denominator, 4))}{STOP}")
 
-    print(f"\033[1m\033[33mSolution 2: \033[0m")
+    print(f"{YELLOW}Solution 2: {STOP}")
     sign = "-"
-    print(f"\033[1;33m\033[1m{simpli(-b,integ(round(factor, 4)))}\033[0m")
-    print(f"\033[1;36m\33[1m= {integ(round(-b / denominator - discriminant** 0.5 / denominator, 4))}\033[0m")
+    print(f"{YELLOW}{simpli(-b,integ(round(factor, 4)))}{STOP}")
+    print(f"{CYAN}= {integ(round(-b / denominator - discriminant** 0.5 / denominator, 4))}{STOP}")
     
 elif a != 0 and discriminant == 0:
-    print("\n\033[1m\033[34m========SOLUTION========\033[0m")
-    if int(-b) % int(denominator) == 0:
-        print(f"\033[1;33m\033[1m= {integ(-b / denominator)}\033[0m")
+    print(f"\n{BLUE}========SOLUTION========{STOP}")
+    if -b % denominator == 0:
+        print(f"{YELLOW}= {integ(-b / denominator)}{STOP}")
     else:
-        print(f"\033[1;33m\033[1m= {integ(-b / gcd(-b, denominator))}{cldiv(integ(denominator / gcd(-b, denominator)))}\033[0m")
-    print(f"\033[1;36m\33[1m= {integ(round(-b / denominator, 4))}\033[0m")
+        print(f"{YELLOW}= {integ(-b / gcd(-b, denominator))}{cldiv(integ(denominator / gcd(-b, denominator)))}{STOP}")
+    print(f"{CYAN}= {integ(round(-b / denominator, 4))}{STOP}")
 
 elif a == 0:
-    print("\n\033[1m\033[34m========SOLUTION========\033[0m")
+    print(f"\n{BLUE}========SOLUTION========{STOP}")
     if a == 0 and b != 0:
         if -c % b == 0:
-            print(f"\033[1;33m\033[1m= {integ(-c / b)}\033[0m")
+            print(f"{YELLOW}= {integ(-c / b)}{STOP}")
         else:
-            print(f"\033[1;33m\033[1m= {integ((absone(-c)) / gcd(integ(absone(-c)),integ(absone(b))))}{cldiv(integ(absone(b) / gcd(integ(absone(-c)),integ(absone(b)))))}\033[0m")
-        print(f"\033[1;36m\33[1m= {integ(round(-c / b, 4))}\033[0m")
+            print(f"{YELLOW}= {integ((absone(-c)) / gcd(integ(absone(-c)),integ(absone(b))))}{cldiv(integ(absone(b) / gcd(integ(absone(-c)),integ(absone(b)))))}{STOP}")
+        print(f"{CYAN}= {integ(round(-c / b, 4))}{STOP}")
 
     elif a == 0 and b == 0 and c != 0:
-            print("\33[1mThe equation is contradictory.\033[0m")
+            print("{WHITE}The equation is contradictory.{STOP}")
 
     elif a == 0 and b == 0 and c == 0:
-        print(f"\033[1m= 0 = 0")
-        print(f"\33[1mThere are infinitely many solutions.\033[0m")
+        print(f"{WHITE}= 0 = 0")
+        print(f"{WHITE}There are infinitely many solutions.{STOP}")
 
 else:
 
-    print("\n\033[1m\33[34m========COMPLEX SOLUTIONS========\033[0m")
+    print(f"\n{BLUE}========COMPLEX SOLUTIONS========{STOP}")
     if b != 0:
-        print(f"\033[1m\033[33mSolution 1: \033[0m")
+        print(f"{YELLOW}Solution 1: {STOP}")
         sign = "+"
-        print(f"\033[1;33m\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
-        print(f"\033[1;36m\33[1m= {rdeas(integ(round(-b / denominator, 4)))}{spcredcr(-b, denominator)}\033[1;35m{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
+        print(f"{YELLOW}{csimpli(-b,integ(round(factor, 4)))}{STOP}")
+        print(f"{CYAN}= {rdeas(integ(round(-b / denominator, 4)))}{spcredcr(-b, denominator)}{PURPLE}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i{STOP}")
         
-        print(f"\033[1m\033[33mSolution 2: \033[0m")
+        print(f"{YELLOW}Solution 2: {STOP}")
         sign = "-"
-        print(f"\033[1;33m\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
-        print(f"\033[1;36m\33[1m= {integ(round(-b / denominator, 4))} {sign} \033[1;35m{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
+        print(f"{YELLOW}{csimpli(-b,integ(round(factor, 4)))}{STOP}")
+        print(f"{CYAN}= {integ(round(-b / denominator, 4))} {sign} {PURPLE}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i{STOP}")
     elif b == 0:
-        print(f"\033[1;33m\033[1m{csimpli(-b,integ(round(factor, 4)))}\033[0m")
-        print(f"\033[1m\033[33mSolution 1: \033[0m")
+        print(f"{YELLOW}Solution 1: {STOP}")
         sign = "+"
-        print(f"\033[1;36m\33[1m= {rdeas(integ(round(-b / denominator, 4)))}\033[1;35m{spcredcr(-b, denominator)}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
-        print(f"\033[1m\033[33mSolution 2: \033[0m")
+        print(f"{YELLOW}{csimpli(-b,integ(round(factor, 4)))}{STOP}")
+        print(f"{CYAN}= {rdeas(integ(round(-b / denominator, 4)))}{PURPLE}{spcredcr(-b, denominator)}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i{STOP}")
+
+        print(f"{YELLOW}Solution 2: {STOP}")
         sign = "-"
-        print(f"\033[1;36m\33[1m= {rdeas(integ(round(-b / denominator, 4)))}\033[1;35m{spcredcr(-b, denominator)}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i\033[0m")
+        print(f"{YELLOW}{csimpli(-b,integ(round(factor, 4)))}{STOP}")
+        print(f"{CYAN}= {rdeas(integ(round(-b / denominator, 4)))}{PURPLE}{spcredcr(-b, denominator)}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i{STOP}")

@@ -6,33 +6,33 @@ CYAN = "\033[1;36m\33[1m"
 WHITE = "\033[1m"
 STOP = "\033[0m"
 
-print("{GREEN}Enter the coefficient a: {STOP}", end='')
-a = input("{WHITE}")
+print(f"{GREEN}Enter the coefficient a: {STOP}", end='')
+a = input(f"{WHITE}")
 while isinstance(a, str):
     try:
         a = float(a)
     except ValueError:
         print("Give A Valid Value")
-        print("{GREEN}Enter the coefficient a: {STOP}", end='')
-        a = input("\033[1m")
-print("{GREEN}Enter the coefficient b: {STOP}", end='')
-b = input("{WHITE}")
+        print(f"{GREEN}Enter the coefficient a: {STOP}", end='')
+        a = input(f"{WHITE}")
+print(f"{GREEN}Enter the coefficient b: {STOP}", end='')
+b = input(f"{WHITE}")
 while isinstance(b, str):
     try:
         b = float(b)
     except ValueError:
         print("Give A Valid Value")
-        print("{GREEN}Enter the coefficient b: {STOP}", end='')
-        b = input("\033[1m")
-print("{GREEN}Enter the coefficient c: {STOP}", end='')
-c = input("\033[1m")
+        print(f"{GREEN}Enter the coefficient b: {STOP}", end='')
+        b = input(f"{WHITE}")
+print(f"{GREEN}Enter the coefficient c: {STOP}", end='')
+c = input(f"{WHITE}")
 while isinstance(c, str):
     try:
         c = float(c)
     except ValueError:
         print("Give A Valid Value")
-        print("{GREEN}Enter the coefficient c: {STOP}", end='')
-        c = input("{WHITE}")
+        print(f"{GREEN}Enter the coefficient c: {STOP}", end='')
+        c = input(f"{WHITE}")
 
 discriminant = b**2 - 4*a*c
 
@@ -210,9 +210,9 @@ elif a == 0:
         print(f"{CYAN}= {integ(round(-c / b, 4))}{STOP}")
 
     elif a == 0 and b == 0 and c != 0:
-            print("{WHITE}The equation is contradictory.{STOP}")
+            print(f"{WHITE}The equation is contradictory.{STOP}")
 
-    elif a == 0 and b == 0 and c == 0:
+    else:
         print(f"{WHITE}= 0 = 0")
         print(f"{WHITE}There are infinitely many solutions.{STOP}")
 
@@ -229,7 +229,7 @@ else:
         sign = "-"
         print(f"{YELLOW}{csimpli(-b,integ(round(factor, 4)))}{STOP}")
         print(f"{CYAN}= {integ(round(-b / denominator, 4))} {sign} {PURPLE}{integ(round(abs(discriminant)**0.5 / denominator, 4))}i{STOP}")
-    elif b == 0:
+    else:
         print(f"{YELLOW}Solution 1: {STOP}")
         sign = "+"
         print(f"{YELLOW}{csimpli(-b,integ(round(factor, 4)))}{STOP}")

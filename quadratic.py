@@ -138,6 +138,19 @@ def gcd(x, y):
         (x, y) = (y, x % y)
     return x
 
+def zeroer(po, lo):
+    if sign == "+":
+        if po / lo == 0:
+            return ""
+        else:
+            return f"{integ(round(po, 4))}{cldiv(integ(round(lo, 4)))} {sign} "
+    else:
+        if po / lo == 0:
+            return "-"
+        else:
+            return f"{integ(round(po, 4))}{cldiv(integ(round(lo, 4)))} {sign} "
+
+
 def csimpli(le,re):
     gcdl = gcd(int(le), int(denominator))
     gcdr = gcd(int(re), int(denominator))
@@ -157,7 +170,7 @@ def csimpli(le,re):
         elif sign == "-":
             return f"{rdeas(integ(round(le / denominator)))}{PURPLE}{defactor(integ(round(re / gcdr)))}{desqon(lradic(integ(abs(discriminant))))}i / {integ(round(denominator / gcdr, 4))}"
     elif gcdl != denominator and gcdr != denominator:
-        return f"{integ(round(le / gcdl, 4))}{cldiv(integ(round(denominator / gcdl, 4)))} {sign} {PURPLE}{defactor(integ(round(re / gcdr, 4)))}{desqon(lradic(integ(abs(discriminant))))}i{cldiv(integ(round(denominator / gcdr, 4)))}"
+        return f"{zeroer(le / gcdl, denominator / gcdl)}{PURPLE}{defactor(integ(round(re / gcdr, 4)))}{desqon(lradic(integ(abs(discriminant))))}i{cldiv(integ(round(denominator / gcdr, 4)))}"
 
 def simpli(le,re):
     gcdl = gcd(int(le), int(denominator))
@@ -194,11 +207,11 @@ def simpli(le,re):
                     if sign == "-":
                         return f"{integ(round((le / gcdl - re / gcdr) / gcd(int(le / gcdl - re / gcdr), int(denominator / gcdl)), 4))}{cldiv(integ(round(denominator / gcdl / gcd(int(le / gcdl - re / gcdr), int(denominator / gcdl)), 4)))}"
                 else:
-                    return f"{integ(round(le / gcdl, 4))}{cldiv(integ(round(denominator / gcdl, 4)))} {sign} {defactor(integ(round(re / gcdr, 4)))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{cldiv(integ(round(denominator / gcdr, 4)))}"
+                    return f"{zeroer(le / gcdl, denominator / gcdl)}{defactor(integ(round(re / gcdr, 4)))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{cldiv(integ(round(denominator / gcdr, 4)))}"
             else:
-                return f"{integ(round(le / gcdl, 4))}{cldiv(integ(round(denominator / gcdl, 4)))} {sign} {defactor(integ(round(re / gcdr, 4)))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{cldiv(integ(round(denominator / gcdr, 4)))}"
+                return f"{zeroer(le / gcdl, denominator / gcdl)}{defactor(integ(round(re / gcdr, 4)))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{cldiv(integ(round(denominator / gcdr, 4)))}"
         else:
-            return f"{integ(round(le / gcdl, 4))}{cldiv(integ(round(denominator / gcdl, 4)))} {sign} {defactor(integ(round(re / gcdr, 4)))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{cldiv(integ(round(denominator / gcdr, 4)))}"
+            return f"{zeroer(le / gcdl, denominator / gcdl)}{defactor(integ(round(re / gcdr, 4)))}{sqone(re, gcdr, discriminant)}{desqon(lradic(integ(abs(discriminant))))}{cldiv(integ(round(denominator / gcdr, 4)))}"
 
 if a !=0 and discriminant > 0:
 
